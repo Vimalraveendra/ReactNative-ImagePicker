@@ -10,12 +10,16 @@ import {
   View,
   Image,
 } from 'react-native';
+import Animated from 'react-native-reanimated';
+import BottomSheet from 'reanimated-bottom-sheet';
+import renderInner from './Components/RenderInner';
 
 const width = Dimensions.get('window').width;
 
 const App = () => {
   const [ListItem, setListItem] = useState([]);
-
+  const sheetRef = React.useRef(null);
+  const fall = new Animated.Value(1);
   const renderItem = () => {
     return (
       <View>
@@ -25,6 +29,8 @@ const App = () => {
   };
 
   const AddImage = () => {};
+  const renderHeader = () => {};
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>React Native Add Image</Text>
@@ -33,6 +39,16 @@ const App = () => {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         extraData={ListItem}
+      />
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={[300, 0, 0]}
+        renderContent={renderInner}
+        renderHeader={renderHeader}
+        initialSnap={1}
+        borderRadius={10}
+        callbackNode={fall}
+        enabledGestureInteraction={false}
       />
       <TouchableOpacity style={styles.btn} onPress={AddImage}>
         <Text style={styles.btnText}>Add Image</Text>
