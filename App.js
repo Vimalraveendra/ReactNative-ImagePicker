@@ -13,6 +13,7 @@ import {
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import renderInner from './Components/RenderInner';
+import renderHeader from './Components/RenderHeader';
 
 const width = Dimensions.get('window').width;
 
@@ -28,8 +29,9 @@ const App = () => {
     );
   };
 
-  const AddImage = () => {};
-  const renderHeader = () => {};
+  const AddImage = () => {
+    sheetRef.current.snapTo(0);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +45,7 @@ const App = () => {
       <BottomSheet
         ref={sheetRef}
         snapPoints={[300, 0, 0]}
-        renderContent={renderInner}
+        renderContent={() => renderInner({sheetRef})}
         renderHeader={renderHeader}
         initialSnap={1}
         borderRadius={10}

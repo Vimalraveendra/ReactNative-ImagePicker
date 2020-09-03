@@ -12,26 +12,32 @@ Feather.loadFont();
 
 const width = Dimensions.get('window').width;
 
-const renderInner = () => (
-  <View style={styles.inner}>
-    <View style={styles.panel}>
-      <Text style={[styles.text, {marginBottom: 5, color: '#333'}]}>
-        Upload Photo
-      </Text>
-      <Text style={styles.subText}>Choose your Photo</Text>
+const renderInner = ({sheetRef}) => {
+  console.log('pros', sheetRef);
+  const ClearDisplay = () => {
+    sheetRef.current.snapTo(2);
+  };
+  return (
+    <View style={styles.inner}>
+      <View style={styles.panel}>
+        <Text style={[styles.text, {marginBottom: 5, color: '#333'}]}>
+          Upload Photo
+        </Text>
+        <Text style={styles.subText}>Choose your Photo</Text>
+      </View>
+      <TouchableOpacity style={styles.panelBtn}>
+        <Feather name="camera" size={24} />
+        <Text style={styles.text}>Take Photo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.panelBtn}>
+        <Text style={styles.text}>Take From Gallery</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.panelBtn} onPress={ClearDisplay}>
+        <Text style={styles.text}>Cancel</Text>
+      </TouchableOpacity>
     </View>
-    <TouchableOpacity style={styles.panelBtn}>
-      <Feather name="camera" size={24} />
-      <Text style={styles.text}>Take Photo</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.panelBtn}>
-      <Text style={styles.text}>Take From Gallery</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.panelBtn}>
-      <Text style={styles.text}>Cancel</Text>
-    </TouchableOpacity>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   text: {
