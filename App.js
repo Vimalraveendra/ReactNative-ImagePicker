@@ -7,13 +7,12 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
-  View,
-  Image,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import renderInner from './Components/RenderInner';
 import renderHeader from './Components/RenderHeader';
+import renderItem from './Components/RenderItem';
 
 const width = Dimensions.get('window').width;
 
@@ -21,16 +20,17 @@ const App = () => {
   const [ListItem, setListItem] = useState([]);
   const sheetRef = React.useRef(null);
   const fall = new Animated.Value(1);
-  const renderItem = () => {
-    return (
-      <View>
-        <Text>Hello</Text>
-      </View>
-    );
-  };
 
   const AddImage = () => {
     sheetRef.current.snapTo(0);
+  };
+  const selectedImage = (image) => {
+    let source = {uri: image.path};
+    let item = {
+      id: Date.now(),
+      url: source,
+    };
+    setListItem([...ListItem, item]);
   };
 
   return (
@@ -45,7 +45,7 @@ const App = () => {
       <BottomSheet
         ref={sheetRef}
         snapPoints={[300, 0, 0]}
-        renderContent={() => renderInner({sheetRef})}
+        renderContent={() => renderInner({sheetRef, selectedImage})}
         renderHeader={renderHeader}
         initialSnap={1}
         borderRadius={10}

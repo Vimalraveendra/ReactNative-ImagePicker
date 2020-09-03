@@ -7,15 +7,28 @@ import {
   Dimensions,
 } from 'react-native';
 
+import ImagePicker from 'react-native-image-crop-picker';
+
 import Feather from 'react-native-vector-icons/Feather';
 Feather.loadFont();
 
 const width = Dimensions.get('window').width;
 
-const renderInner = ({sheetRef}) => {
-  console.log('pros', sheetRef);
+const renderInner = ({sheetRef, selectedImage}) => {
   const ClearDisplay = () => {
     sheetRef.current.snapTo(2);
+  };
+
+  const takePhotoFromCamera = () => {};
+  const choosePhotoFromGallery = () => {
+    ImagePicker.openPicker({
+      width: 400,
+      height: 400,
+      cropping: true,
+    }).then((image) => {
+      selectedImage(image);
+      sheetRef.current.snapTo(2);
+    });
   };
   return (
     <View style={styles.inner}>
@@ -25,11 +38,13 @@ const renderInner = ({sheetRef}) => {
         </Text>
         <Text style={styles.subText}>Choose your Photo</Text>
       </View>
-      <TouchableOpacity style={styles.panelBtn}>
+      <TouchableOpacity style={styles.panelBtn} onPress={takePhotoFromCamera}>
         <Feather name="camera" size={24} />
         <Text style={styles.text}>Take Photo</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.panelBtn}>
+      <TouchableOpacity
+        style={styles.panelBtn}
+        onPress={choosePhotoFromGallery}>
         <Text style={styles.text}>Take From Gallery</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.panelBtn} onPress={ClearDisplay}>
