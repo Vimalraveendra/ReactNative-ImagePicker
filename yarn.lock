@@ -5624,6 +5624,11 @@ react-native-gesture-handler@^1.7.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-image-crop-picker@^0.33.2:
+  version "0.33.2"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.33.2.tgz#2ff761422118f9789ff823e8a3ba71a13525fd7c"
+  integrity sha512-RtOcPtshOAX2rXTFnfo2bXQVFkd0W8QifgUlzlDC8uCArt9P9++pygdXdhrLr1fk+mdiiYATQqIj1Xn3InPhfg==
+
 react-native-reanimated@^1.13.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.0.tgz#1ee5d27d34bd2cee7dfad4ae9a3673300872c917"
